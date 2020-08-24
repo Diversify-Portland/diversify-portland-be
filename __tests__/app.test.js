@@ -20,4 +20,10 @@ describe('diversify-portland-be routes', () => {
     await mongoose.connection.close();
     return mongod.stop();
   });
+
+  it('has a 404', async() => {
+    const response = await request(app).get('/not-found');
+
+    expect(response.body).toEqual({ status: 404, message: 'Not Found' });
+  });
 });
